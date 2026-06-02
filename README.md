@@ -155,6 +155,7 @@ Testirane konfiguracije:
 5. Learning rate = 0.0005
 6. Learning rate = 0.01
 7. Kombinovani model (64-32 + Dropout 0.3)
+8. Kombinovani model (64-32 + Dropout 0.3 + Learning rate = 0.01)
 
 Eksperimenti su organizovani kroz automatizovani eksperimentalni pipeline korišćenjem konfiguracionih objekata i pomoćnih funkcija za treniranje i evaluaciju modela.
 
@@ -168,15 +169,16 @@ Eksperimenti su organizovani kroz automatizovani eksperimentalni pipeline koriš
 | No Dropout | 0.8833 | 0.7857 | 0.8627 |
 | LR = 0.0005 | 0.8500 | 0.6786 | 0.8085 |
 | LR = 0.01 | 0.9167 | 0.8214 | 0.9020 |
-| Combined | 0.9167 | 0.8214 | 0.9020 |
+| Combined (64-32, Dropout 0.3) | 0.9167 | 0.8214 | 0.9020 |
+| Combined (64-32, Dropout 0.3, LR = 0.01) | 0.9000 | 0.8214 | 0.8846 |
 
 ### Analiza rezultata
 
-Dobijeni rezultati pokazuju da povećanje složenosti modela nije automatski dovelo do poboljšanja performansi.
+Rezultati eksperimenata pokazuju da više konfiguracija ostvaruje veoma slične performanse. Najbolje rezultate ostvarili su modeli trenirani nad SMOTE balansiranim podacima, model sa većom arhitekturom, model sa learning rate vrednošću 0.01, kao i kombinovani model sa arhitekturom 64-32 i Dropout regularizacijom.
 
-Najveći uticaj ostvarila je primena SMOTE metode, koja je povećala recall i F1-score u odnosu na početni model.
+Dodatno je ispitan i model koji kombinuje veću arhitekturu, Dropout regularizaciju i learning rate vrednost 0.01. Iako je ova konfiguracija ostvarila dobre rezultate, nije uspela da nadmaši najbolje modele iz prethodnih eksperimenata.
 
-Eksperimenti sa različitim vrednostima learning rate parametra pokazali su da premala vrednost usporava učenje i smanjuje performanse, dok povećanje vrednosti nije donelo značajno poboljšanje u odnosu na najbolje modele.
+Dobijeni rezultati ukazuju da kombinovanje pojedinačno uspešnih hiperparametara ne mora nužno dovesti do dodatnog poboljšanja performansi modela.
 
 ---
 
@@ -216,6 +218,8 @@ Glavno ograničenje projekta predstavlja mali broj uzoraka.
 Dataset sadrži svega 297 instanci, što je značajno manje od savremenih skupova podataka koji se koriste za treniranje neuronskih mreža. Uprkos tome, Cleveland dataset je zadržan zbog svoje široke zastupljenosti u naučnoj literaturi i značaja u oblasti medicinske dijagnostike.
 
 Rezultati pokazuju da povećanje broja neurona i složenosti modela nije dovelo do značajnog poboljšanja performansi. Ovo ukazuje da za manje skupove podataka jednostavniji modeli često mogu biti podjednako efikasni kao i složenije arhitekture.
+
+Dodatni eksperiment sa kombinacijom veće arhitekture (64-32), Dropout regularizacije od 0.3 i learning rate vrednosti 0.01 nije doveo do poboljšanja rezultata. Ovakav ishod pokazuje da efekti hiperparametara nisu nezavisni i da kombinovanje pojedinačno uspešnih parametara ne garantuje bolju generalizaciju modela.
 
 Takođe, eksperiment sa SMOTE metodom pokazao je da kvalitetna priprema podataka može imati veći uticaj na performanse od same promene arhitekture neuronske mreže.
 
